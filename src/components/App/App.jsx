@@ -8,28 +8,42 @@ import { useState } from "react";
 
 export const App = () => {
   const [todo, setTodo] = useState("");
-  const [count, setCount] = useState(0);
   const [todosArray, setTodosArray] = useState([]);
+  const [count, setCount] = useState(0);
 
   const addNewTodo = () => {
     if (todo !== "") {
       setTodosArray([...todosArray, todo]);
       setTodo("");
+      setCount(count + 1);
     }
   };
 
+  const isComplitedTodo = (done) => {
+    !done ? setCount(count + 1) : setCount(count - 1);
+  };
+
+  const removeTodo = (id, done) => {
+    setTodosArray((prevState) =>
+      prevState.filter((elem, index) => index !== id)
+    );
+    !done ? setCount(count) : setCount(count - 1);
+  };
+
+  function getActiveTodos() {}
+
+  function getComplitedTodos() {}
+
   return (
     <div className={styles.root}>
+      {<Header todo={todo} setTodo={setTodo} addNewTodo={addNewTodo} />}
       {
-        <Header
-          todo={todo}
-          setTodo={setTodo}
-          addNewTodo={addNewTodo}
-          count={count}
-          setCount={setCount}
+        <Main
+          todosArray={todosArray}
+          isComplitedTodo={isComplitedTodo}
+          removeTodo={removeTodo}
         />
       }
-      {<Main todosArray={todosArray} />}
       {<Footer count={count} />}
     </div>
   );

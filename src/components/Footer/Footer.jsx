@@ -6,7 +6,7 @@ export const Footer = ({ count }) => {
   const todoCountString = count == 1 ? "item left" : "items left";
 
   return (
-    <footer className={styles.root}>
+    <footer className={count == 0 ? styles.rootOff : styles.root}>
       <span className={styles.todoCount}>
         {count} {todoCountString}
       </span>

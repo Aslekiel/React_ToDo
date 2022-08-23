@@ -7,15 +7,21 @@
   width: 100%;
 }
 
+.rootOff {
+  display: none;
+}
+
 .todoCount {
   color: grey;
   margin-left: 5px;
+  width: 15%;
 }
 
 .clearComplited {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 16px;
 
   outline: none;
   border: 0;

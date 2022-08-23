@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./styles.module.css";
 
-export const Header = ({ todo, setTodo, addNewTodo, count, setCount }) => {
+export const Header = ({ todo, setTodo, addNewTodo }) => {
   return (
     <header className={styles.root}>
       <h1>todos</h1>
@@ -9,7 +9,6 @@ export const Header = ({ todo, setTodo, addNewTodo, count, setCount }) => {
         onSubmit={(event) => {
           event.preventDefault();
           addNewTodo(todo);
-          setCount(count + 1);
         }}
       >
         <input
