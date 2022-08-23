@@ -30,3 +30,7 @@
   cursor: pointer;
   /* text-decoration: underline; */
 }
+
+.clearComplitedOff {
+  display: none;
+}

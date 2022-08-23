@@ -9,9 +9,8 @@ export const Main = ({ todosArray, isComplitedTodo, removeTodo }) => {
       {todosArray.map((todo, index) => {
         return (
           <TodoItem
-            key={index}
+            key={todo.id}
             todo={todo}
-            id={index}
             isComplitedTodo={isComplitedTodo}
             removeTodo={removeTodo}
           />

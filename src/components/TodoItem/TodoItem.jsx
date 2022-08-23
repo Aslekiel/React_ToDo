@@ -1,27 +1,25 @@
-import { counter } from "@fortawesome/fontawesome-svg-core";
-import React, { useState } from "react";
+import React from "react";
 import styles from "./styles.module.css";
 
-export const TodoItem = ({ todo, id, isComplitedTodo, removeTodo }) => {
-  const [done, setDone] = useState(false);
-
+export const TodoItem = ({ todo, isComplitedTodo, removeTodo }) => {
   return (
-    <div className={styles.root}>
+    <div className={styles.root} id={todo.id}>
       <button
         className={styles.checkbox}
         onClick={() => {
-          setDone(!done);
-          isComplitedTodo(!done);
+          isComplitedTodo(todo);
         }}
       >
-        <div className={!done ? styles.circle : styles.done}></div>
-        <label className={!done ? styles.todo : styles.todoDone}>{todo}</label>
+        <div className={!todo.isComplited ? styles.circle : styles.done}></div>
+        <label className={!todo.isComplited ? styles.todo : styles.todoDone}>
+          {todo.title}
+        </label>
       </button>
 
       <button
         className={styles.closeButton}
         onClick={() => {
-          removeTodo(id, !done);
+          removeTodo(todo.id, !todo.isComplited);
         }}
       >
         X
