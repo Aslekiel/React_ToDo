@@ -3,17 +3,31 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  width: 30%;
 
   margin: 10px 0;
 }
 
 li {
   list-style-type: none;
+  padding: 0 5px;
 }
 
 a {
   text-decoration: none;
-
   color: grey;
+
+  padding: 5px;
+}
+
+.selected {
+  border: 1px solid grey;
+  border-radius: 10px;
+}
+
+@media screen and (max-width: 420px) {
+  .root {
+    justify-content: center;
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
 }

@@ -5,9 +5,7 @@ import styles from "./styles.module.css";
 export const Footer = ({
   count,
   todosArray,
-  getAllTodos,
-  getActiveTodos,
-  getComplitedTodos,
+  changeFilter,
   deleteComplited,
 }) => {
   const todoCountString = count == 1 ? "item left" : "items left";
@@ -16,19 +14,20 @@ export const Footer = ({
       <span className={styles.todoCount}>
         {count} {todoCountString}
       </span>
-      <Filter
-        getAllTodos={getAllTodos}
-        getActiveTodos={getActiveTodos}
-        getComplitedTodos={getComplitedTodos}
-      />
-      <button
-        className={styles.clearComplited}
+      <Filter changeFilter={changeFilter} className={styles.filter} />
+
+      <span
+        className={
+          count == todosArray.length
+            ? styles.clearComplitedOff
+            : styles.clearComplited
+        }
         onClick={() => {
           deleteComplited(todosArray);
         }}
       >
         Clear complited
-      </button>
+      </span>
     </footer>
   );
 };

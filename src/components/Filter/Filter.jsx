@@ -1,34 +1,38 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 
-export const Filter = ({ getAllTodos, getActiveTodos, getComplitedTodos }) => {
+export const Filter = ({ changeFilter }) => {
+  const [selected, setSelected] = useState(0);
   return (
     <ul className={styles.root}>
-      <li className={styles.all}>
+      <li id={1} className={selected == 1 ? styles.selected : styles.none}>
         <a
-          href="#"
-          onClick={() => {
-            getAllTodos();
+          href="#All"
+          onClick={(event) => {
+            changeFilter("All");
+            setSelected(1);
           }}
         >
           All
         </a>
       </li>
-      <li className={styles.active}>
+      <li id={2} className={selected == 2 ? styles.selected : styles.none}>
         <a
-          href="#"
+          href="#Active"
           onClick={() => {
-            getActiveTodos();
+            changeFilter("Active");
+            setSelected(2);
           }}
         >
           Active
         </a>
       </li>
-      <li className={styles.complited}>
+      <li id={3} className={selected == 3 ? styles.selected : styles.none}>
         <a
-          href="#"
+          href="#Complited"
           onClick={() => {
-            getComplitedTodos();
+            changeFilter("Complited");
+            setSelected(3);
           }}
         >
           Complited

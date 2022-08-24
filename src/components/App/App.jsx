@@ -1,23 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./styles.module.css";
 import { Header } from "../Header/Header";
 import { Main } from "../Main/Main";
 import { Footer } from "../Footer/Footer";
 
-import { useState } from "react";
-
-export const App = () => {
-  const [todoTitle, setTodoTitle] = useState("");
+export const App = ({}) => {
   const [todosArray, setTodosArray] = useState([]);
-
   const [count, setCount] = useState(0);
+  const [filteredTodos, setFilteredTodos] = useState("All");
 
   const addNewTodo = (todo) => {
     if (todo.title !== "") {
       setTodosArray([...todosArray, todo]);
-      setTodoTitle("");
       setCount(count + 1);
     }
+  };
+
+  const changeFilter = (filter) => {
+    setFilteredTodos(filter);
   };
 
   const isComplitedTodo = (todo) => {
@@ -29,12 +29,6 @@ export const App = () => {
     setTodosArray((prevState) => prevState.filter((elem) => elem.id !== id));
     !complited ? setCount(count) : setCount(count - 1);
   };
-
-  const getAllTodos = () => {};
-
-  const getActiveTodos = () => {};
-
-  const getComplitedTodos = () => {};
 
   const deleteComplited = (todosArray) => {
     todosArray.map((todo) => {
@@ -48,29 +42,20 @@ export const App = () => {
 
   return (
     <div className={styles.root}>
-      {
-        <Header
-          todoTitle={todoTitle}
-          setTodoTitle={setTodoTitle}
-          addNewTodo={addNewTodo}
-          count={count}
-          setCount={setCount}
-        />
-      }
+      {<Header addNewTodo={addNewTodo} />}
       {
         <Main
           todosArray={todosArray}
           isComplitedTodo={isComplitedTodo}
           removeTodo={removeTodo}
+          filteredTodos={filteredTodos}
         />
       }
       {
         <Footer
           count={count}
           todosArray={todosArray}
-          getAllTodos={getAllTodos}
-          getActiveTodos={getActiveTodos}
-          getComplitedTodos={getComplitedTodos}
+          changeFilter={changeFilter}
           deleteComplited={deleteComplited}
         />
       }

@@ -23,7 +23,6 @@ export const TodoItem = ({ todo, isComplitedTodo, removeTodo }) => {
         }}
       >
         X
-        <img className={styles.cross} />
       </button>
     </div>
   );
