@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styles from "./styles.module.css";
 
 export const Filter = ({ changeFilter }) => {
-  const [selected, setSelected] = useState(0);
+  const [selected, setSelected] = useState(1);
   return (
     <ul className={styles.root}>
       <li id={1} className={selected == 1 ? styles.selected : styles.none}>

@@ -43,6 +43,8 @@
   border: 0;
   background: transparent;
   width: 5%;
+
+  cursor: pointer;
 }
 
 .circle {
