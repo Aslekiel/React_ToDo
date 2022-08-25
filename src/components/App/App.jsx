@@ -4,61 +4,78 @@ import { Header } from "../Header/Header";
 import { Main } from "../Main/Main";
 import { Footer } from "../Footer/Footer";
 
+import { nanoid } from "nanoid";
+
 export const App = ({}) => {
   const [todosArray, setTodosArray] = useState([]);
-  const [count, setCount] = useState(0);
-  const [filteredTodos, setFilteredTodos] = useState("All");
+  const [filterForTodos, setFilteredTodos] = useState("All");
+  const filteredTodos =
+    filterForTodos === "Active"
+      ? todosArray.filter((item) => !item.isComplited)
+      : todosArray.filter((item) => item.isComplited);
 
-  const addNewTodo = (todo) => {
+  const amountTodo =
+    filterForTodos === "Complited"
+      ? todosArray.filter((item) => item.isComplited).length
+      : todosArray.filter((item) => !item.isComplited).length;
+
+  const addNewTodo = (todoTitle) => {
+    const todo = {
+      id: nanoid(),
+      title: todoTitle,
+      isComplited: false,
+    };
+
     if (todo.title !== "") {
       setTodosArray([...todosArray, todo]);
-      setCount(count + 1);
     }
   };
 
-  const changeFilter = (filter) => {
-    setFilteredTodos(filter);
+  const editTodo = (editedTodo, todo) => {
+    setTodosArray(
+      todosArray.map((item) =>
+        todo.id === item.id ? { ...item, title: editedTodo } : item
+      )
+    );
+  };
+
+  const removeTodo = (todo) => {
+    setTodosArray((prevState) =>
+      prevState.filter((elem) => elem.id !== todo.id)
+    );
   };
 
   const isComplitedTodo = (todo) => {
-    todo.isComplited = !todo.isComplited;
-    !todo.isComplited ? setCount(count + 1) : setCount(count - 1);
-  };
-
-  const removeTodo = (id, complited) => {
-    setTodosArray((prevState) => prevState.filter((elem) => elem.id !== id));
-    !complited ? setCount(count) : setCount(count - 1);
+    setTodosArray(
+      todosArray.map((item) =>
+        todo.id === item.id ? { ...item, isComplited: !item.isComplited } : item
+      )
+    );
   };
 
   const deleteComplited = (todosArray) => {
-    todosArray.map((todo) => {
-      if (todo.isComplited) {
-        setTodosArray((prevState) =>
-          prevState.filter((elem) => elem.id !== todo.id)
-        );
-      }
-    });
+    setTodosArray(todosArray.filter((item) => !item.isComplited));
+  };
+
+  const getFilter = (filter) => {
+    setFilteredTodos(filter);
   };
 
   return (
     <div className={styles.root}>
-      {<Header addNewTodo={addNewTodo} />}
-      {
-        <Main
-          todosArray={todosArray}
-          isComplitedTodo={isComplitedTodo}
-          removeTodo={removeTodo}
-          filteredTodos={filteredTodos}
-        />
-      }
-      {
-        <Footer
-          count={count}
-          todosArray={todosArray}
-          changeFilter={changeFilter}
-          deleteComplited={deleteComplited}
-        />
-      }
+      <Header addNewTodo={addNewTodo} />
+      <Main
+        todos={filterForTodos === "All" ? todosArray : filteredTodos}
+        removeTodo={removeTodo}
+        isComplitedTodo={isComplitedTodo}
+        editTodo={editTodo}
+      />
+      <Footer
+        amountTodo={amountTodo}
+        todosArray={todosArray}
+        getFilter={getFilter}
+        deleteComplited={deleteComplited}
+      />
     </div>
   );
 };

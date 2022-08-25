@@ -3,22 +3,22 @@ import { Filter } from "../Filter/Filter";
 import styles from "./styles.module.css";
 
 export const Footer = ({
-  count,
+  amountTodo,
   todosArray,
-  changeFilter,
+  getFilter,
   deleteComplited,
 }) => {
-  const todoCountString = count == 1 ? "item left" : "items left";
+  const amountTodoString = amountTodo === 1 ? "item left" : "items left";
   return (
     <footer className={!todosArray.length ? styles.rootOff : styles.root}>
       <span className={styles.todoCount}>
-        {count} {todoCountString}
+        {amountTodo} {amountTodoString}
       </span>
-      <Filter changeFilter={changeFilter} className={styles.filter} />
+      <Filter getFilter={getFilter} className={styles.filter} />
 
       <span
         className={
-          count == todosArray.length
+          amountTodo === todosArray.length || amountTodo === 0
             ? styles.clearComplitedOff
             : styles.clearComplited
         }

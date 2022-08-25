@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 
-import { nanoid } from "nanoid";
-
 export const Header = ({ addNewTodo }) => {
   const [todoTitle, setTodoTitle] = useState("");
 
-  const todo = {
-    id: nanoid(),
-    title: todoTitle,
-    isComplited: false,
+  const onFormSubmit = (event) => {
+    event.preventDefault();
+    addNewTodo(todoTitle);
+    setTodoTitle("");
+  };
+
+  const onChangeInput = (event) => {
+    event.preventDefault();
+    setTodoTitle(event.target.value);
   };
 
   return (
@@ -18,9 +21,7 @@ export const Header = ({ addNewTodo }) => {
       <form
         className={styles.form}
         onSubmit={(event) => {
-          event.preventDefault();
-          addNewTodo(todo);
-          setTodoTitle("");
+          onFormSubmit(event);
         }}
       >
         <input
@@ -29,9 +30,9 @@ export const Header = ({ addNewTodo }) => {
           placeholder="What need to be done?"
           value={todoTitle}
           onChange={(event) => {
-            event.preventDefault();
-            setTodoTitle(event.target.value);
+            onChangeInput(event);
           }}
+          autoFocus
         />
       </form>
     </header>

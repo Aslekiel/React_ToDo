@@ -1,38 +1,44 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 
-export const Filter = ({ changeFilter }) => {
+export const Filter = ({ getFilter }) => {
   const [selected, setSelected] = useState(1);
+
+  const changeFilters = (event) => {
+    getFilter(event.target.innerText);
+    setSelected(Number(event.target.id));
+  };
+
   return (
     <ul className={styles.root}>
-      <li id={1} className={selected == 1 ? styles.selected : styles.none}>
+      <li className={selected === 1 ? styles.selected : styles.none}>
         <a
+          id={1}
           href="#All"
           onClick={(event) => {
-            changeFilter("All");
-            setSelected(1);
+            changeFilters(event);
           }}
         >
           All
         </a>
       </li>
-      <li id={2} className={selected == 2 ? styles.selected : styles.none}>
+      <li className={selected === 2 ? styles.selected : styles.none}>
         <a
+          id={2}
           href="#Active"
-          onClick={() => {
-            changeFilter("Active");
-            setSelected(2);
+          onClick={(event) => {
+            changeFilters(event);
           }}
         >
           Active
         </a>
       </li>
-      <li id={3} className={selected == 3 ? styles.selected : styles.none}>
+      <li className={selected === 3 ? styles.selected : styles.none}>
         <a
+          id={3}
           href="#Complited"
-          onClick={() => {
-            changeFilter("Complited");
-            setSelected(3);
+          onClick={(event) => {
+            changeFilters(event);
           }}
         >
           Complited
