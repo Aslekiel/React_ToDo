@@ -13,30 +13,30 @@ export const App = ({}) => {
   const todos = todosArray.filter((item) => {
     if (filterForTodos === "All") return todosArray;
     if (filterForTodos === "Active") {
-      return !item.isComplited;
+      return !item.isCompleted;
     }
-    return item.isComplited;
+    return item.isCompleted;
   });
 
-  const amountTodo = todosArray.filter((item) => !item.isComplited).length;
+  const amountTodo = todosArray.filter((item) => !item.isCompleted).length;
 
   const addNewTodo = (todoTitle) => {
     if (!todoTitle) return;
     const todo = {
       id: nanoid(),
       title: todoTitle,
-      isComplited: false,
+      isCompleted: false,
     };
     setTodosArray([...todosArray, todo]);
   };
 
-  const compliteAllTodos = () => {
-    const compliteAllTodosArray = todosArray.map((item) => {
+  const completeAllTodos = () => {
+    const completeAllTodosArray = todosArray.map((item) => {
       return !amountTodo
-        ? { ...item, isComplited: false }
-        : { ...item, isComplited: true };
+        ? { ...item, isCompleted: false }
+        : { ...item, isCompleted: true };
     });
-    setTodosArray(compliteAllTodosArray);
+    setTodosArray(completeAllTodosArray);
   };
 
   const editTodo = (editedTodo, todo) => {
@@ -52,32 +52,32 @@ export const App = ({}) => {
     );
   };
 
-  const getComplitedTodo = (todo) => {
-    const complitedTodosArray = todosArray.map((item) =>
-      todo.id === item.id ? { ...item, isComplited: !item.isComplited } : item
+  const getCompletedTodo = (todo) => {
+    const completedTodosArray = todosArray.map((item) =>
+      todo.id === item.id ? { ...item, isCompleted: !item.isCompleted } : item
     );
-    setTodosArray(complitedTodosArray);
+    setTodosArray(completedTodosArray);
   };
 
-  const deleteComplited = (todosArray) => {
-    const activeTodos = todosArray.filter((item) => !item.isComplited);
+  const deleteCompleted = (todosArray) => {
+    const activeTodos = todosArray.filter((item) => !item.isCompleted);
     setTodosArray(activeTodos);
   };
 
   return (
     <div className={styles.root}>
-      <Header addNewTodo={addNewTodo} compliteAllTodos={compliteAllTodos} />
+      <Header addNewTodo={addNewTodo} completeAllTodos={completeAllTodos} />
       <Main
         todos={todos}
         removeTodo={removeTodo}
-        getComplitedTodo={getComplitedTodo}
+        getCompletedTodo={getCompletedTodo}
         editTodo={editTodo}
       />
       <Footer
         amountTodo={amountTodo}
         todosArray={todosArray}
         setFilteredTodos={setFilteredTodos}
-        deleteComplited={deleteComplited}
+        deleteCompleted={deleteCompleted}
       />
     </div>
   );

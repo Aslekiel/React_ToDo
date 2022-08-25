@@ -5,9 +5,8 @@ import styles from "./styles.module.css";
 export const Footer = ({
   amountTodo,
   todosArray,
-
   setFilteredTodos,
-  deleteComplited,
+  deleteCompleted,
 }) => {
   const amountTodoString = amountTodo === 1 ? "item left" : "items left";
   return (
@@ -23,7 +22,7 @@ export const Footer = ({
             : styles.clearComplited
         }
         onClick={() => {
-          deleteComplited(todosArray);
+          deleteCompleted(todosArray);
         }}
       >
         Clear complited

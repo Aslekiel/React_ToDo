@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 
-export const Header = ({ addNewTodo, compliteAllTodos }) => {
+export const Header = ({ addNewTodo, completeAllTodos }) => {
   const [todoTitle, setTodoTitle] = useState("");
 
   const onFormSubmit = (event) => {
@@ -18,7 +18,7 @@ export const Header = ({ addNewTodo, compliteAllTodos }) => {
     <header className={styles.root}>
       <h1>todos</h1>
       <form className={styles.form} onSubmit={onFormSubmit}>
-        <div className={styles.compliteAll} onClick={compliteAllTodos}></div>
+        <div className={styles.compliteAll} onClick={completeAllTodos}></div>
         <input
           className={styles.input}
           type="text"

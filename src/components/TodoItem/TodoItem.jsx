@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 
-export const TodoItem = ({ todo, getComplitedTodo, removeTodo, editTodo }) => {
+export const TodoItem = ({ todo, getCompletedTodo, removeTodo, editTodo }) => {
   const [editedTodo, setEditedTodo] = useState(todo.title);
   const [edit, setEdit] = useState(false);
 
@@ -24,10 +24,10 @@ export const TodoItem = ({ todo, getComplitedTodo, removeTodo, editTodo }) => {
       <button
         className={styles.checkbox}
         onClick={() => {
-          getComplitedTodo(todo);
+          getCompletedTodo(todo);
         }}
       >
-        <div className={!todo.isComplited ? styles.circle : styles.done}></div>
+        <div className={!todo.isCompleted ? styles.circle : styles.done}></div>
       </button>
       {!edit ? (
         <>
@@ -38,7 +38,7 @@ export const TodoItem = ({ todo, getComplitedTodo, removeTodo, editTodo }) => {
             }}
           >
             <label
-              className={!todo.isComplited ? styles.todo : styles.todoDone}
+              className={!todo.isCompleted ? styles.todo : styles.todoDone}
             >
               {todo.title}
             </label>

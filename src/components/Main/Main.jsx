@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 
 import { TodoItem } from "../TodoItem/TodoItem";
 
-export const Main = ({ todos, getComplitedTodo, removeTodo, editTodo }) => {
+export const Main = ({ todos, getCompletedTodo, removeTodo, editTodo }) => {
   return (
     <ul className={styles.root}>
       {todos.map((todo) => {
@@ -11,7 +11,7 @@ export const Main = ({ todos, getComplitedTodo, removeTodo, editTodo }) => {
           <TodoItem
             key={todo.id}
             todo={todo}
-            getComplitedTodo={getComplitedTodo}
+            getCompletedTodo={getCompletedTodo}
             removeTodo={removeTodo}
             editTodo={editTodo}
           />
