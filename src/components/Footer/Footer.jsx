@@ -5,7 +5,8 @@ import styles from "./styles.module.css";
 export const Footer = ({
   amountTodo,
   todosArray,
-  getFilter,
+
+  setFilteredTodos,
   deleteComplited,
 }) => {
   const amountTodoString = amountTodo === 1 ? "item left" : "items left";
@@ -14,11 +15,10 @@ export const Footer = ({
       <span className={styles.todoCount}>
         {amountTodo} {amountTodoString}
       </span>
-      <Filter getFilter={getFilter} className={styles.filter} />
-
+      <Filter setFilteredTodos={setFilteredTodos} className={styles.filter} />
       <span
         className={
-          amountTodo === todosArray.length || amountTodo === 0
+          amountTodo === todosArray.length
             ? styles.clearComplitedOff
             : styles.clearComplited
         }

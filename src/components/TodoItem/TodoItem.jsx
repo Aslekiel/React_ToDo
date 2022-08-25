@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 
-export const TodoItem = ({ todo, isComplitedTodo, removeTodo, editTodo }) => {
+export const TodoItem = ({ todo, getComplitedTodo, removeTodo, editTodo }) => {
   const [editedTodo, setEditedTodo] = useState(todo.title);
   const [edit, setEdit] = useState(false);
 
@@ -11,12 +11,10 @@ export const TodoItem = ({ todo, isComplitedTodo, removeTodo, editTodo }) => {
   };
 
   const onChangeInput = (event) => {
-    event.preventDefault();
     setEditedTodo(event.target.value);
   };
 
-  const onBlurInput = (event) => {
-    event.preventDefault();
+  const onBlurInput = () => {
     setEditedTodo(todo.title);
     setEdit(false);
   };
@@ -26,50 +24,51 @@ export const TodoItem = ({ todo, isComplitedTodo, removeTodo, editTodo }) => {
       <button
         className={styles.checkbox}
         onClick={() => {
-          isComplitedTodo(todo);
+          getComplitedTodo(todo);
         }}
       >
         <div className={!todo.isComplited ? styles.circle : styles.done}></div>
       </button>
-      <div
-        className={edit ? styles.todoTitleOff : styles.todoTitle}
-        onDoubleClick={() => {
-          setEdit(true);
-        }}
-      >
-        <label className={!todo.isComplited ? styles.todo : styles.todoDone}>
-          {todo.title}
-        </label>
-      </div>
-
-      <form
-        className={!edit ? styles.formOff : styles.form}
-        onSubmit={(event) => {
-          onFormSubmit(event);
-          setEdit(false);
-        }}
-      >
-        <input
-          className={styles.input}
-          type="text"
-          value={editedTodo}
-          onChange={(event) => {
-            onChangeInput(event);
+      {!edit ? (
+        <>
+          <div
+            className={styles.todoTitle}
+            onDoubleClick={() => {
+              setEdit(true);
+            }}
+          >
+            <label
+              className={!todo.isComplited ? styles.todo : styles.todoDone}
+            >
+              {todo.title}
+            </label>
+          </div>
+          <button
+            className={styles.closeButton}
+            onClick={() => {
+              removeTodo(todo);
+            }}
+          >
+            X
+          </button>
+        </>
+      ) : (
+        <form
+          className={styles.form}
+          onSubmit={(event) => {
+            onFormSubmit(event);
+            setEdit(false);
           }}
-          onBlur={(event) => {
-            onBlurInput(event);
-          }}
-        />
-      </form>
-
-      <button
-        className={edit ? styles.closeButtonOff : styles.closeButton}
-        onClick={() => {
-          removeTodo(todo);
-        }}
-      >
-        X
-      </button>
+        >
+          <input
+            className={styles.input}
+            type="text"
+            value={editedTodo}
+            onChange={onChangeInput}
+            onBlur={onBlurInput}
+          />
+        </form>
+      )}
     </div>
   );
 };

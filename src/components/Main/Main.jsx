@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./styles.module.css";
 
 import { TodoItem } from "../TodoItem/TodoItem";
 
-export const Main = ({ todos, isComplitedTodo, removeTodo, editTodo }) => {
+export const Main = ({ todos, getComplitedTodo, removeTodo, editTodo }) => {
   return (
     <ul className={styles.root}>
       {todos.map((todo) => {
@@ -11,7 +11,7 @@ export const Main = ({ todos, isComplitedTodo, removeTodo, editTodo }) => {
           <TodoItem
             key={todo.id}
             todo={todo}
-            isComplitedTodo={isComplitedTodo}
+            getComplitedTodo={getComplitedTodo}
             removeTodo={removeTodo}
             editTodo={editTodo}
           />

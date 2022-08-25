@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./styles.module.css";
 
-export const Header = ({ addNewTodo }) => {
+export const Header = ({ addNewTodo, compliteAllTodos }) => {
   const [todoTitle, setTodoTitle] = useState("");
 
   const onFormSubmit = (event) => {
@@ -11,27 +11,20 @@ export const Header = ({ addNewTodo }) => {
   };
 
   const onChangeInput = (event) => {
-    event.preventDefault();
     setTodoTitle(event.target.value);
   };
 
   return (
     <header className={styles.root}>
       <h1>todos</h1>
-      <form
-        className={styles.form}
-        onSubmit={(event) => {
-          onFormSubmit(event);
-        }}
-      >
+      <form className={styles.form} onSubmit={onFormSubmit}>
+        <div className={styles.compliteAll} onClick={compliteAllTodos}></div>
         <input
           className={styles.input}
           type="text"
           placeholder="What need to be done?"
           value={todoTitle}
-          onChange={(event) => {
-            onChangeInput(event);
-          }}
+          onChange={onChangeInput}
           autoFocus
         />
       </form>
