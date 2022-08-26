@@ -1,14 +1,21 @@
 import React, { useState } from "react";
-import { editTodo, getCompletedTodo, removeTodo } from "../../actions/actions";
+import { useDispatch } from "react-redux";
+import {
+  editTodo,
+  getCompletedTodo,
+  removeTodo,
+} from "../../store/redusers/todos";
+
 import styles from "./styles.module.css";
 
-export const TodoItem = ({ todo, dispatch }) => {
+export const TodoItem = ({ todo }) => {
+  const dispatch = useDispatch();
   const [editedTodo, setEditedTodo] = useState(todo.title);
   const [edit, setEdit] = useState(false);
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    dispatch(editTodo(editedTodo, todo));
+    dispatch(editTodo({ editedTodo, todo }));
   };
 
   const onChangeInput = (event) => {
@@ -47,7 +54,7 @@ export const TodoItem = ({ todo, dispatch }) => {
           <button
             className={styles.closeButton}
             onClick={() => {
-              dispatch(removeTodo(todo));
+              dispatch(removeTodo(todo.id));
             }}
           >
             X

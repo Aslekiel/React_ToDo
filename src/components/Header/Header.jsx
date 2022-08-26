@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import { addTodo, completeAllTodos } from "../../actions/actions";
+import { useDispatch } from "react-redux";
+import { addTodo, completeAllTodos } from "../../store/redusers/todos";
+
 import styles from "./styles.module.css";
 
-export const Header = ({ amountTodo, dispatch }) => {
+export const Header = () => {
+  const dispatch = useDispatch();
   const [todoTitle, setTodoTitle] = useState("");
 
   const onFormSubmit = (event) => {
@@ -23,7 +26,7 @@ export const Header = ({ amountTodo, dispatch }) => {
         <div
           className={styles.compliteAll}
           onClick={() => {
-            dispatch(completeAllTodos(amountTodo));
+            dispatch(completeAllTodos());
           }}
         ></div>
         <input

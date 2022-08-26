@@ -1,26 +1,37 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import { changeFilter } from "../../store/redusers/filter";
+import store from "../../store/store";
 import styles from "./styles.module.css";
 
-export const Filter = ({ filterForTodos, setFilteredTodos }) => {
+export const Filter = () => {
+  const dispatch = useDispatch();
+
   return (
     <ul className={styles.root}>
-      <li className={filterForTodos === "All" ? styles.selected : styles.none}>
+      <li
+        className={
+          store.getState().filter === "All" ? styles.selected : styles.none
+        }
+      >
         <a
           href="#All"
           onClick={() => {
-            setFilteredTodos("All");
+            dispatch(changeFilter("All"));
           }}
         >
           All
         </a>
       </li>
       <li
-        className={filterForTodos === "Active" ? styles.selected : styles.none}
+        className={
+          store.getState().filter === "Active" ? styles.selected : styles.none
+        }
       >
         <a
           href="#Active"
           onClick={() => {
-            setFilteredTodos("Active");
+            dispatch(changeFilter("Active"));
           }}
         >
           Active
@@ -28,13 +39,15 @@ export const Filter = ({ filterForTodos, setFilteredTodos }) => {
       </li>
       <li
         className={
-          filterForTodos === "Complited" ? styles.selected : styles.none
+          store.getState().filter === "Complited"
+            ? styles.selected
+            : styles.none
         }
       >
         <a
           href="#Complited"
           onClick={() => {
-            setFilteredTodos("Complited");
+            dispatch(changeFilter("Complited"));
           }}
         >
           Complited
