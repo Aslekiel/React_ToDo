@@ -1,13 +1,14 @@
 import React, { useState } from "react";
+import { editTodo, getCompletedTodo, removeTodo } from "../../actions/actions";
 import styles from "./styles.module.css";
 
-export const TodoItem = ({ todo, getCompletedTodo, removeTodo, editTodo }) => {
+export const TodoItem = ({ todo, dispatch }) => {
   const [editedTodo, setEditedTodo] = useState(todo.title);
   const [edit, setEdit] = useState(false);
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    editTodo(editedTodo, todo);
+    dispatch(editTodo(editedTodo, todo));
   };
 
   const onChangeInput = (event) => {
@@ -24,7 +25,7 @@ export const TodoItem = ({ todo, getCompletedTodo, removeTodo, editTodo }) => {
       <button
         className={styles.checkbox}
         onClick={() => {
-          getCompletedTodo(todo);
+          dispatch(getCompletedTodo(todo));
         }}
       >
         <div className={!todo.isCompleted ? styles.circle : styles.done}></div>
@@ -46,7 +47,7 @@ export const TodoItem = ({ todo, getCompletedTodo, removeTodo, editTodo }) => {
           <button
             className={styles.closeButton}
             onClick={() => {
-              removeTodo(todo);
+              dispatch(removeTodo(todo));
             }}
           >
             X

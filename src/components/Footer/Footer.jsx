@@ -1,4 +1,5 @@
 import React from "react";
+import { deleteComplitedTodos } from "../../actions/actions";
 import { Filter } from "../Filter/Filter";
 import styles from "./styles.module.css";
 
@@ -7,7 +8,7 @@ export const Footer = ({
   todosArray,
   filterForTodos,
   setFilteredTodos,
-  deleteCompleted,
+  dispatch,
 }) => {
   const amountTodoString = amountTodo === 1 ? "item left" : "items left";
   return (
@@ -27,7 +28,7 @@ export const Footer = ({
             : styles.clearComplited
         }
         onClick={() => {
-          deleteCompleted(todosArray);
+          dispatch(deleteComplitedTodos());
         }}
       >
         Clear complited
