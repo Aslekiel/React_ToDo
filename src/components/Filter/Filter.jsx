@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { changeFilter } from "../../store/redusers/filter";
+import { changeFilter } from "../../store/redusers/rootReducer";
 import store from "../../store/store";
 import styles from "./styles.module.css";
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteComplitedTodos } from "../../store/redusers/todos";
+import { deleteComplitedTodos } from "../../store/redusers/rootReducer";
 
 import { Filter } from "../Filter/Filter";
 import styles from "./styles.module.css";
