@@ -10,13 +10,15 @@ export const App = ({}) => {
   const [todosArray, setTodosArray] = useState([]);
   const [filterForTodos, setFilteredTodos] = useState("All");
 
-  const todos = todosArray.filter((item) => {
-    if (filterForTodos === "All") return todosArray;
-    if (filterForTodos === "Active") {
-      return !item.isCompleted;
-    }
-    return item.isCompleted;
-  });
+  const todos = useMemo(() => {
+    return todosArray.filter((item) => {
+      if (filterForTodos === "All") return todosArray;
+      if (filterForTodos === "Active") {
+        return !item.isCompleted;
+      }
+      return item.isCompleted;
+    });
+  }, [todosArray, filterForTodos]);
 
   const amountTodo = todosArray.filter((item) => !item.isCompleted).length;
 
@@ -76,6 +78,7 @@ export const App = ({}) => {
       <Footer
         amountTodo={amountTodo}
         todosArray={todosArray}
+        filterForTodos={filterForTodos}
         setFilteredTodos={setFilteredTodos}
         deleteCompleted={deleteCompleted}
       />
