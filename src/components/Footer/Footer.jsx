@@ -5,7 +5,7 @@ import { Filter } from "../Filter/Filter";
 import styles from "./styles.module.css";
 
 export const Footer = ({ amountTodo }) => {
-  const allReceivedTodos = useSelector((state) => state.todos.todos);
+  const allReceivedTodos = useSelector((state) => state.todos);
   const amountTodoString = amountTodo === 1 ? "item left" : "items left";
 
   const dispatch = useDispatch();

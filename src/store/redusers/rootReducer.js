@@ -7,20 +7,20 @@ const initialState = {
 
 const todos = createSlice({
   name: "todos",
-  initialState: initialState,
+  initialState: initialState.todos,
   reducers: {
     addTodo(state, action) {
-      state.todos.push({
+      state.push({
         id: nanoid(),
         title: action.payload,
         isCompleted: false,
       });
     },
     removeTodo(state, action) {
-      state.todos = state.todos.filter((elem) => elem.id !== action.payload);
+      return (state = state.filter((elem) => elem.id !== action.payload));
     },
     getCompletedTodo(state, action) {
-      state.todos.forEach((item) => {
+      state.forEach((item) => {
         if (action.payload.id !== item.id) {
           return;
         }
@@ -28,10 +28,10 @@ const todos = createSlice({
       });
     },
     deleteComplitedTodos(state) {
-      state.todos = state.todos.filter((item) => !item.isCompleted);
+      return (state = state.filter((item) => !item.isCompleted));
     },
     editTodo(state, action) {
-      state.todos.forEach((item) => {
+      state.forEach((item) => {
         if (action.payload.todo.id !== item.id) {
           return;
         }
@@ -39,10 +39,8 @@ const todos = createSlice({
       });
     },
     completeAllTodos(state) {
-      const checkTodosIsComplited = state.todos.every(
-        (elem) => elem.isCompleted
-      );
-      state.todos.forEach((item) => {
+      const checkTodosIsComplited = state.every((elem) => elem.isCompleted);
+      state.forEach((item) => {
         item.isCompleted = !checkTodosIsComplited;
       });
     },
@@ -51,10 +49,10 @@ const todos = createSlice({
 
 const filter = createSlice({
   name: "filter",
-  initialState: initialState,
+  initialState: initialState.filter,
   reducers: {
     changeFilter(state, action) {
-      state.filter = action.payload;
+      return (state = action.payload);
     },
   },
 });
