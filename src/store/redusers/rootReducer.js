@@ -10,73 +10,42 @@ const rootReduser = createSlice({
   initialState: initialState,
   reducers: {
     addTodo(state, action) {
-      return {
-        todos: [
-          ...state.todos,
-          {
-            id: nanoid(),
-            title: action.payload,
-            isComplited: false,
-          },
-        ],
-
-        filter: "All",
-      };
+      state.todos.push({
+        id: nanoid(),
+        title: action.payload,
+        isCompleted: false,
+      });
     },
     removeTodo(state, action) {
-      return {
-        todos: [...state.todos.filter((elem) => elem.id !== action.payload)],
-        filter: "All",
-      };
+      state.todos = state.todos.filter((elem) => elem.id !== action.payload);
     },
     getCompletedTodo(state, action) {
-      return {
-        todos: [
-          ...state.todos.map((item) =>
-            action.payload.id === item.id
-              ? { ...item, isCompleted: !item.isCompleted }
-              : item
-          ),
-        ],
-        filter: "All",
-      };
+      state.todos.map((item) =>
+        action.payload.id === item.id
+          ? (item.isCompleted = !item.isCompleted)
+          : item
+      );
     },
     deleteComplitedTodos(state) {
-      return {
-        todos: [...state.todos.filter((item) => !item.isCompleted)],
-        filter: "All",
-      };
+      state.todos = state.todos.filter((item) => !item.isCompleted);
     },
     editTodo(state, action) {
-      return {
-        todos: [
-          ...state.todos.map((item) =>
-            action.payload.todo.id === item.id
-              ? { ...item, title: action.payload.editedTodo }
-              : item
-          ),
-        ],
-        filter: "All",
-      };
+      state.todos.map((item) =>
+        action.payload.todo.id === item.id
+          ? (item.title = action.payload.editedTodo)
+          : item
+      );
     },
     completeAllTodos(state) {
       const checkTodosIsComplited = state.todos.every(
         (elem) => elem.isCompleted
       );
-      return {
-        todos: [
-          ...state.todos.map((item) => {
-            return { ...item, isCompleted: !checkTodosIsComplited };
-          }),
-        ],
-        filter: "All",
-      };
+      state.todos.map((item) => {
+        item.isCompleted = !checkTodosIsComplited;
+      });
     },
     changeFilter(state, action) {
-      return {
-        todos: [...state.todos],
-        filter: action.payload,
-      };
+      state.filter = action.payload;
     },
   },
 });
