@@ -7,15 +7,18 @@ import { Footer } from "../components/Footer/Footer";
 import { todos } from "../store/selectors/selectors";
 
 export const App = () => {
-  const todosArray = useSelector(todos);
+  const allReceivedTodos = useSelector((state) => state.todos);
+  const filteredTodosArray = useSelector(todos);
 
-  const amountTodo = todosArray.filter((item) => !item.isCompleted).length;
+  const amountTodo = filteredTodosArray.filter(
+    (item) => !item.isCompleted
+  ).length;
 
   return (
     <div className={styles.root}>
       <Header />
-      <Main todos={todosArray} />
-      <Footer amountTodo={amountTodo} todosArray={todosArray} />
+      <Main todos={filteredTodosArray} />
+      <Footer amountTodo={amountTodo} todos={allReceivedTodos} />
     </div>
   );
 };

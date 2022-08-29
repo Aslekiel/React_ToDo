@@ -1,19 +1,15 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { changeFilter } from "../../store/redusers/rootReducer";
-import store from "../../store/store";
 import styles from "./styles.module.css";
+import store from "../../store/store";
 
 export const Filter = () => {
   const dispatch = useDispatch();
-
+  const filter = store.getState().filter;
   return (
     <ul className={styles.root}>
-      <li
-        className={
-          store.getState().filter === "All" ? styles.selected : styles.none
-        }
-      >
+      <li className={filter === "All" ? styles.selected : styles.none}>
         <a
           href="#All"
           onClick={() => {
@@ -23,11 +19,7 @@ export const Filter = () => {
           All
         </a>
       </li>
-      <li
-        className={
-          store.getState().filter === "Active" ? styles.selected : styles.none
-        }
-      >
+      <li className={filter === "Active" ? styles.selected : styles.none}>
         <a
           href="#Active"
           onClick={() => {
@@ -37,20 +29,14 @@ export const Filter = () => {
           Active
         </a>
       </li>
-      <li
-        className={
-          store.getState().filter === "Complited"
-            ? styles.selected
-            : styles.none
-        }
-      >
+      <li className={filter === "Completed" ? styles.selected : styles.none}>
         <a
-          href="#Complited"
+          href="#Completed"
           onClick={() => {
-            dispatch(changeFilter("Complited"));
+            dispatch(changeFilter("Completed"));
           }}
         >
-          Complited
+          Completed
         </a>
       </li>
     </ul>
