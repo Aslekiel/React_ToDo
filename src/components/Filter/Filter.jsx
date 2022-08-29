@@ -1,10 +1,11 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeFilter } from "../../store/redusers/rootReducer";
+import { changeFilter } from "../../store/redusers/todos";
+
 import styles from "./styles.module.css";
 
 export const Filter = () => {
-  const filter = useSelector((state) => state.filter);
+  const filter = useSelector((state) => state.todos.filter);
 
   const dispatch = useDispatch();
   return (

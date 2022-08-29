@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addTodo, completeAllTodos } from "../../store/redusers/rootReducer";
+import { addTodo, completeAllTodos } from "../../store/redusers/todos";
 
 import styles from "./styles.module.css";
 

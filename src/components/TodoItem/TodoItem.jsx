@@ -4,7 +4,7 @@ import {
   editTodo,
   getCompletedTodo,
   removeTodo,
-} from "../../store/redusers/rootReducer";
+} from "../../store/redusers/todos";
 
 import styles from "./styles.module.css";
 

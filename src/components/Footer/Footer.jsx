@@ -1,11 +1,12 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteComplitedTodos } from "../../store/redusers/rootReducer";
+import { deleteComplitedTodos } from "../../store/redusers/todos";
+
 import { Filter } from "../Filter/Filter";
 import styles from "./styles.module.css";
 
 export const Footer = ({ amountTodo }) => {
-  const allReceivedTodos = useSelector((state) => state.todos);
+  const allReceivedTodos = useSelector((state) => state.todos.todos);
   const amountTodoString = amountTodo === 1 ? "item left" : "items left";
 
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 
-export const todosArray = (state) => state.todos;
-export const filterForTodos = (state) => state.filter;
+export const todosArray = (state) => state.todos.todos;
+export const filterForTodos = (state) => state.todos.filter;
 
 export const getFilteredTodos = createSelector(
   [todosArray, filterForTodos],
