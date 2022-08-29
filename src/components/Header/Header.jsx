@@ -5,8 +5,9 @@ import { addTodo, completeAllTodos } from "../../store/redusers/rootReducer";
 import styles from "./styles.module.css";
 
 export const Header = () => {
-  const dispatch = useDispatch();
   const [todoTitle, setTodoTitle] = useState("");
+
+  const dispatch = useDispatch();
 
   const onFormSubmit = (event) => {
     event.preventDefault();
@@ -19,16 +20,15 @@ export const Header = () => {
     setTodoTitle(event.target.value);
   };
 
+  const setCompleteAllTodos = () => {
+    dispatch(completeAllTodos());
+  };
+
   return (
     <header className={styles.root}>
       <h1>todos</h1>
       <form className={styles.form} onSubmit={onFormSubmit}>
-        <div
-          className={styles.compliteAll}
-          onClick={() => {
-            dispatch(completeAllTodos());
-          }}
-        ></div>
+        <div className={styles.compliteAll} onClick={setCompleteAllTodos}></div>
         <input
           className={styles.input}
           type="text"

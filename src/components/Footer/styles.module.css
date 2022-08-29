@@ -24,10 +24,6 @@
   padding: 5px;
 }
 
-.clearComplitedOff {
-  display: none;
-}
-
 @media screen and (max-width: 420px) {
   .root {
     display: grid;

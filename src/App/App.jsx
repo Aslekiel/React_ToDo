@@ -4,11 +4,10 @@ import styles from "./styles.module.css";
 import { Header } from "../components/Header/Header";
 import { Main } from "../components/Main/Main";
 import { Footer } from "../components/Footer/Footer";
-import { todos } from "../store/selectors/selectors";
+import { getFilteredTodos } from "../store/selectors/selectors";
 
 export const App = () => {
-  const allReceivedTodos = useSelector((state) => state.todos);
-  const filteredTodosArray = useSelector(todos);
+  const filteredTodosArray = useSelector(getFilteredTodos);
 
   const amountTodo = filteredTodosArray.filter(
     (item) => !item.isCompleted
@@ -18,7 +17,7 @@ export const App = () => {
     <div className={styles.root}>
       <Header />
       <Main todos={filteredTodosArray} />
-      <Footer amountTodo={amountTodo} todos={allReceivedTodos} />
+      <Footer amountTodo={amountTodo} />
     </div>
   );
 };

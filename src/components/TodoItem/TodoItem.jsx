@@ -16,6 +16,7 @@ export const TodoItem = ({ todo }) => {
   const onFormSubmit = (event) => {
     event.preventDefault();
     dispatch(editTodo({ editedTodo, todo }));
+    setEdit(false);
   };
 
   const onChangeInput = (event) => {
@@ -61,13 +62,7 @@ export const TodoItem = ({ todo }) => {
           </button>
         </>
       ) : (
-        <form
-          className={styles.form}
-          onSubmit={(event) => {
-            onFormSubmit(event);
-            setEdit(false);
-          }}
-        >
+        <form className={styles.form} onSubmit={onFormSubmit}>
           <input
             className={styles.input}
             type="text"
