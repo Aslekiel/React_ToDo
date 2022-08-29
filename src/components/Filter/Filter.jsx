@@ -4,7 +4,8 @@ import { changeFilter } from "../../store/redusers/rootReducer";
 import styles from "./styles.module.css";
 
 export const Filter = () => {
-  const filter = useSelector((state) => state.filter);
+  const filter = useSelector((state) => state.filter.filter);
+
   const dispatch = useDispatch();
   return (
     <ul className={styles.root}>
